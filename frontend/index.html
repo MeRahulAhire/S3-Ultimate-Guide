@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S3: operations sending files</title>
+    <style>
+        body{
+            height: 100vh; background-color: #212121; margin: 0; width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1,input{
+            color: rgb(202, 202, 202);
+        }
+        hr{
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        #abortUpload{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>s3.putObject</h1>
+    <input  type="file"  id="putObject">
+    <button  id="putObjectBtn">send data</button>
+    <hr>
+    <h1>Uploading Large file with Pre-Signed URL (under 5GB)</h1>
+    <input  type="file"  id="presignedUrl">
+    <button  id="presignedUrlBtn">send file</button>
+    <hr>
+    <h1>Uploading Large file with Multipart Upload (above 5GB)</h1>
+    <input  type="file"  id="multipartInput">
+    <button  id="multipartInputBtn">send file</button> 
+    <button id="abortUploadBtn">Abort Upload</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+    <script src="./frontendPutObject.js"></script>
+    <script src="./frontendMultiPartUpload.js"></script>
+    <script src="./frontendAbortMultiPartUpload.js"></script>  
+    <script src="./frontendPreSignedURL.js"></script>
+</body>
+</html>

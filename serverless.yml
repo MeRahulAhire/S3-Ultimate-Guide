@@ -1,0 +1,95 @@
+service: s3-crash-course
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: ap-south-1
+  apiGateway:
+    shouldStartNameWithService: true
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:GetObject"
+            - "s3:PutObject"
+            - "s3:AbortMultipartUpload"
+          Resource: "arn:aws:s3:::${self:custom.bucketName}/*"
+  environment:
+    bucketName: ${self:custom.bucketName}     
+
+custom:
+  bucketName: aws-troll
+
+functions:
+  putObject:
+    handler: objects/API/putObject.handler
+    events:
+      - http:
+          path: /putObject
+          method: post
+          cors: true
+  getSignedUrl:
+    handler: objects/API/putPreSignedUrl.handler
+    events:
+      - http:
+          path: /getSignedUrl
+          method: post
+          cors: true
+
+  getUploadId:
+    handler: objects/API/multiPartUpload/createMultiPartUpload.handler
+    events:
+      - http:
+          path: /getUploadId
+          method: post
+          cors: true
+  getUploadPart:
+    handler: objects/API/multiPartUpload/getUploadPart.handler
+    events:
+      - http:
+          path: /getUploadPart
+          method: post
+          cors: true 
+  completeMultiPartUpload:
+    handler: objects/API/multiPartUpload/completeMultipartUpload.handler
+    events:
+      - http:
+          path: /completeUpload
+          method: post
+          cors: true   
+  abortMultiPartUpload:
+    handler: objects/API/multiPartUpload/abortMultiPartUpload.handler
+    events:
+      - http:
+          path: /abortUpload
+          method: post
+          cors: true                            
+
+          
+resources:
+  Resources:
+    UploadBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+        AccessControl: Private
+        CorsConfiguration:
+          CorsRules:
+            - AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - HEAD
+              AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              ExposedHeaders:
+                - ETag  
+plugins:
+  - serverless-ignore

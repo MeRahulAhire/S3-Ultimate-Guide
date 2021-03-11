@@ -1,0 +1,7 @@
+./bucket/*
+./frontend/*
+./object/deleteObject.js
+./object/deleteObjects.js
+./object/getObject-presignedURL.js
+./object/getObjectTorrent.js
+./object/listObjects.js

@@ -1,0 +1,18 @@
+{
+  "name": "s3-crash-course",
+  "version": "1.0.0",
+  "description": "All the operations with S3",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rahul Ahire",
+  "license": "ISC",
+  "dependencies": {
+    "ab2b64": "^0.9.1",
+    "aws-sdk": "^2.853.0"
+  },
+  "devDependencies": {
+    "serverless-ignore": "^0.1.6"
+  }
+}
