@@ -9,14 +9,14 @@ exports.handler = async (event) => {
 			Key: body.fileName,
 			UploadId: body.uploadId
 		};
-		const completeUpload = await s3.abortMultipartUpload(params).promise();
+		const abortUpload = await s3.abortMultipartUpload(params).promise();
 		return {
 			statusCode: 200,
 			headers: {
 				'Access-Control-Allow-Origin': '*',
 				'Access-Control-Allow-Credentials': true
 			},
-			body: JSON.stringify({ completeUpload: completeUpload })
+			body: JSON.stringify({ abortUpload: abortUpload })
 		};
 	} catch (err) {
 		console.log(err);
