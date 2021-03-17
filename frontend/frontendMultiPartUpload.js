@@ -14,7 +14,7 @@ document.getElementById('multipartInputBtn').addEventListener('click', async () 
 		sessionStorage.setItem('uploadId', uploadId);
 
 		console.log('Inside uploadMultipartFile');
-		const chunkSize = 10 * 1024 * 1024; // 100MiB
+		const chunkSize = 10 * 1024 * 1024; // 10MiB
 		const chunkCount = Math.floor(fileSize / chunkSize) + 1;
 		console.log(`chunkCount: ${chunkCount}`);
 
